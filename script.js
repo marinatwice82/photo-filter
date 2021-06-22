@@ -69,22 +69,26 @@ const btnNext = document.querySelector('.btn-next');
 				currentImg += 1;
 				if(currentImg > 19) currentImg = 0;
 				imgCards.setAttribute("src",imagesNight[currentImg]);
+				imgCards.crossOrigin = "Anonymous";
 			}
 			if(hour<12 && hour>6) {
 				currentImg += 1;
 				if(currentImg > 19) currentImg = 0;
 				imgCards.setAttribute("src",imagesMonday[currentImg]);
+				imgCards.crossOrigin = "Anonymous";
 			}
 			if(hour<18 && hour>12) {			
 				currentImg += 1;
 				if(currentImg > 19) currentImg = 0;
 				imgCards.setAttribute("src",imagesEvening[currentImg]);
+				imgCards.crossOrigin = "Anonymous";
 				
 			}
 			if(hour<24 && hour>18) {
 				currentImg += 1;
 				if(currentImg > 19) currentImg = 0;
 				imgCards.setAttribute("src",imagesDay[currentImg]);
+				imgCards.crossOrigin = "Anonymous";
 			}
 	});
 
@@ -109,6 +113,7 @@ const imageContainer = document.querySelector('.editor');
     		}	
   		}  		
   		reader.readAsDataURL(file);
+		fileInput.value = null;
 	});
 
 
@@ -123,22 +128,20 @@ btnSave.addEventListener('click', function(event) {
     const hueRotate = document.querySelector('input[name=hue');
 
 	const canvas = document.createElement('canvas');
-
-	const ctx = canvas.getContext('2d');
 	const image = document.querySelector('img');
-	image.crossOrigin = 'Anonymous';
+	const ctx = canvas.getContext('2d');
+  	ctx.canvas.width  = 1600;
+  	ctx.canvas.height = 1000;
 
-	canvas.width = 1600;
-	canvas.height = 900;
-  
 	ctx.filter = `blur(${blur.value}px) invert(${invert.value}%) sepia(${sepia.value}%) saturate(${saturate.value}%) hue-rotate(${hueRotate.value}deg)`;
-	ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
 
-   	const link = document.createElement('a'); 
-   		link.href = canvas.toDataURL("image/png");
+	ctx.drawImage(image, 0, 0, canvas.width, canvas.height );
+	
+   	const link = document.createElement('a');
+
+   		link.href =  canvas.toDataURL('image/jpeg');
 		link.download = 'download.png';
 		link.click();
-		link.delete;
 });
 
 
