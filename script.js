@@ -49,3 +49,19 @@ const imageContainer = document.querySelector('.editor');
   		}  		
   		reader.readAsDataURL(file);
 	});
+
+
+/*function fullscreen*/
+const fullscreen = document.querySelector('.fullscreen');
+
+fullscreen.addEventListener('click', function (event) {
+    // игнорирование событий, которые произошли не на данной кнопке
+    if (!event.target.classList.contains('openfullscreen')) return;
+    // если элемент уже в полноэкранном режиме, выйти из него
+    // В противном случае войти в полный экран
+    if (document.fullscreenElement) {
+     document.exitFullscreen();
+    } else {
+     document.documentElement.requestFullscreen();
+    }
+}, false);
