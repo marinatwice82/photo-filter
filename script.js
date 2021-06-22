@@ -26,6 +26,67 @@ btnReset.addEventListener('click', function(e) {
 	});
 });
 
+/*function button  Next picture*/
+const imagesMonday = [];
+const imagesDay = [];
+const imagesEvening = [];
+const imagesNight = [];
+let currentImg = 0;
+
+	function imageCards (){
+		for(let i=1; i<=20; i++){
+			str='https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/morning/'+`${addZero(i)}` +'.jpg';				
+			imagesMonday.push(str);
+		}
+		for(let i=1; i<=20; i++){
+			str='https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/day/'+`${addZero(i)}` +'.jpg';		
+			imagesDay.push(str);
+		}
+		for(let i=1; i<=20; i++){
+			str='https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/evening/'+`${addZero(i)}` +'.jpg';		
+			imagesEvening.push(str);
+		}
+		for(let i=1; i<=20; i++){
+			str='https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/night/'+`${addZero(i)}` +'.jpg';		
+			imagesNight.push(str);
+		}
+	}
+	imageCards();
+
+// Add Zeros
+	function addZero(n) {
+		return (parseInt(n, 10) < 10 ? '0' : '') + n;
+ 	}
+
+const imgCards = document.querySelector('img');
+const btnNext = document.querySelector('.btn-next');
+
+	btnNext.addEventListener('click', function(event)  {
+		let today = new Date(),
+		hour = today.getHours();
+		
+			if (hour<6) {
+				currentImg += 1;
+				if(currentImg > 19) currentImg = 0;
+				imgCards.setAttribute("src",imagesNight[currentImg]);
+			}
+			if(hour<12 && hour>6) {
+				currentImg += 1;
+				if(currentImg > 19) currentImg = 0;
+				imgCards.setAttribute("src",imagesMonday[currentImg]);
+			}
+			if(hour<18 && hour>12) {			
+				currentImg += 1;
+				if(currentImg > 19) currentImg = 0;
+				imgCards.setAttribute("src",imagesEvening[currentImg]);
+				
+			}
+			if(hour<24 && hour>18) {
+				currentImg += 1;
+				if(currentImg > 19) currentImg = 0;
+				imgCards.setAttribute("src",imagesDay[currentImg]);
+			}
+	});
 
 /*function button  Load picture*/
 const fileInput = document.querySelector('input[type="file"]');
