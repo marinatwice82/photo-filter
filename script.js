@@ -51,6 +51,31 @@ const imageContainer = document.querySelector('.editor');
 	});
 
 
+/*function button  Save picture*/
+const btnSave = document.querySelector('.btn-save');
+ 
+btnSave.addEventListener('click', function(event) {
+   const image = document.querySelector('img');
+   let canvas = document.createElement('canvas');
+   //console.log('canvas ', canvas);
+
+   const ctx = canvas.getContext('2d');
+   //console.log('ctx ', ctx);
+
+   const link = document.createElement('a');
+   //console.log("link ", link);
+
+   link.href = canvas.toDataURL("image/png"); 
+   //console.log("link.href ", link.href);
+
+	 link.download = 'download.png';
+   //console.log("link.download ", link.download);
+	 link.click();
+   //console.log("link.click() ", link.click());
+	 link.delete;
+});
+
+
 /*function fullscreen*/
 const fullscreen = document.querySelector('.fullscreen');
 
