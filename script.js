@@ -116,24 +116,29 @@ const imageContainer = document.querySelector('.editor');
 const btnSave = document.querySelector('.btn-save');
  
 btnSave.addEventListener('click', function(event) {
-   const image = document.querySelector('img');
-   let canvas = document.createElement('canvas');
-   //console.log('canvas ', canvas);
+	const blur = document.querySelector('input[name=blur');
+    const invert = document.querySelector('input[name=invert');
+    const sepia = document.querySelector('input[name=sepia');
+    const saturate = document.querySelector('input[name=saturate');
+    const hueRotate = document.querySelector('input[name=hue');
 
-   const ctx = canvas.getContext('2d');
-   //console.log('ctx ', ctx);
+	const canvas = document.createElement('canvas');
 
-   const link = document.createElement('a');
-   //console.log("link ", link);
+	const ctx = canvas.getContext('2d');
+	const image = document.querySelector('img');
+	image.crossOrigin = 'Anonymous';
 
-   link.href = canvas.toDataURL("image/png"); 
-   //console.log("link.href ", link.href);
+	canvas.width = 1600;
+	canvas.height = 900;
+  
+	ctx.filter = `blur(${blur.value}px) invert(${invert.value}%) sepia(${sepia.value}%) saturate(${saturate.value}%) hue-rotate(${hueRotate.value}deg)`;
+	ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
 
-	 link.download = 'download.png';
-   //console.log("link.download ", link.download);
-	 link.click();
-   //console.log("link.click() ", link.click());
-	 link.delete;
+   	const link = document.createElement('a'); 
+   		link.href = canvas.toDataURL("image/png");
+		link.download = 'download.png';
+		link.click();
+		link.delete;
 });
 
 
